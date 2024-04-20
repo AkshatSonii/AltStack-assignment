@@ -1,0 +1,52 @@
+[
+    {
+        "question": "Which module is used to work with file operations in Node.js?",
+        "options": ["fs", "http", "path", "net"],
+        "answer": "fs"
+    },
+    {
+        "question": "What is the primary function of the Event Loop in Node.js?",
+        "options": ["Database operations", "User interface rendering", "Asynchronous I/O operations", "CPU-intensive calculations"],
+        "answer": "Asynchronous I/O operations"
+    },
+    {
+        "question": "Which of the following is a built-in global object in Node.js?",
+        "options": ["document", "window", "global", "navigator"],
+        "answer": "global"
+    },
+    {
+        "question": "What is a callback in Node.js?",
+        "options": ["A function passed as an argument to another function", "A module for error handling", "A built-in method for data validation", "A timer function"],
+        "answer": "A function passed as an argument to another function"
+    },
+    {
+        "question": "Which module is used for URL resolution and parsing in Node.js?",
+        "options": ["url", "querystring", "path", "util"],
+        "answer": "url"
+    },
+    {
+        "question": "How can you include an external module in your Node.js application?",
+        "options": ["require('module_name')", "import 'module_name'", "include 'module_name'", "addModule('module_name')"],
+        "answer": "require('module_name')"
+    },
+    {
+        "question": "What does the 'npm init' command do?",
+        "options": ["Initializes a new Node.js application", "Installs all npm packages", "Initializes a new npm project and creates a package.json file", "Updates npm to the latest version"],
+        "answer": "Initializes a new npm project and creates a package.json file"
+    },
+    {
+        "question": "Which method is used to execute code after a specified delay in Node.js?",
+        "options": ["setTimeout()", "setInterval()", "delay()", "wait()"],
+        "answer": "setTimeout()"
+    },
+    {
+        "question": "What does the 'process.argv' array contain?",
+        "options": ["Environment variables", "Command-line arguments", "Node.js version information", "Application settings"],
+        "answer": "Command-line arguments"
+    },
+    {
+        "question": "Which module provides utilities for working with file and directory paths?",
+        "options": ["fs", "path", "url", "querystring"],
+        "answer": "path"
+    }
+]

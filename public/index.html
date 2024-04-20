@@ -1,0 +1,169 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Node.js Quiz</title>
+</head>
+
+<body>
+    <h1>Node.js Quiz</h1>
+
+    <form id="quiz-form">
+         Questions will be populated here 
+    </form>
+
+    <button type="submit" form="quiz-form">Submit</button>
+
+    <div id="results"></div>
+
+    <script>
+        const form = document.getElementById('quiz-form');
+        const resultsDiv = document.getElementById('results');
+
+        fetch('/api/questions')
+            .then(response => response.json())
+            .then(questions => {
+                questions.forEach((question, index) => {
+                    const options = question.options.map(option => `
+                    <input type="radio" name="q${index}" value="${option}">${option}<br>
+                `);
+                    form.innerHTML += `<h3>${question.question}</h3>${options.join('')}`;
+                });
+            });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const answers = [];
+
+            for (let [key, value] of formData.entries()) {
+                answers.push(value);
+            }
+
+            fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ answers }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                });
+        });
+
+        function displayResults(data) {
+            resultsDiv.innerHTML = `<h2>Your Score: ${data.score}/${data.results.length}</h2>`;
+
+            data.results.forEach((result, index) => {
+                const resultDiv = document.createElement('div');
+                resultDiv.innerHTML = `
+                    <p><strong>Question ${index + 1}:</strong> ${result.correct ? 'Correct' : 'Incorrect'}</p>
+                    <p><strong>Your Answer:</strong> ${result.your_answer}</p>
+                    ${result.correct ? '' : `<p><strong>Correct Answer:</strong> ${result.correct_answer}</p>`}
+                `;
+                resultsDiv.appendChild(resultDiv);
+            });
+        }
+    </script>
+</body>
+
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Node.js Quiz</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Node.js Quiz</h1>
+
+        <form id="quiz-form">
+            <!-- Questions will be populated here -->
+        </form>
+
+        <div class="text-center mt-4">
+            <button type="submit" form="quiz-form" class="btn btn-primary">Submit</button>
+        </div>
+
+        <div id="results" class="mt-5">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('quiz-form');
+        const resultsDiv = document.getElementById('results');
+
+        fetch('/api/questions')
+            .then(response => response.json())
+            .then(questions => {
+                questions.forEach((question, index) => {
+                    const options = question.options.map(option => `
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="q${index}-${option}" name="q${index}" class="custom-control-input" value="${option}">
+                        <label class="custom-control-label" for="q${index}-${option}">${option}</label>
+                    </div>
+                `);
+                    form.innerHTML += `<div class="mb-4"><h5>${question.question}</h5>${options.join('')}</div>`;
+                });
+            });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const answers = [];
+
+            for (let [key, value] of formData.entries()) {
+                answers.push(value);
+            }
+
+            fetch('/api/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ answers }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                });
+        });
+
+        function displayResults(data) {
+            resultsDiv.innerHTML = `<h2 class="text-center mb-4">Your Score: ${data.score}/${data.results.length}</h2>`;
+
+            data.results.forEach((result, index) => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = "card mb-3";
+                resultDiv.innerHTML = `
+                    <div class="card-body">
+                        <p class="mb-0"><strong>Question ${index + 1}:</strong> ${result.correct ? 'Correct' : 'Incorrect'}</p>
+                        <p class="mb-0"><strong>Your Answer:</strong> ${result.your_answer}</p>
+                        ${result.correct ? '' : `<p class="mb-0"><strong>Correct Answer:</strong> ${result.correct_answer}</p>`}
+                    </div>
+                `;
+                resultsDiv.appendChild(resultDiv);
+            });
+        }
+    </script>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
